@@ -14,7 +14,6 @@ public class HomePage extends BasePage {
     @FindBy(how = How.TAG_NAME, using = "a")
     List<WebElement> linksToPages;
 
-
     public HomePage selectLinkToPage(String page) {
         WebElement link = linksToPages.stream().filter(webElement -> webElement.getText().equals(page)).findFirst().get();
         link.click();
