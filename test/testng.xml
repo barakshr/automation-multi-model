@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Testing">
+    <test name="HorizontalSliderTests_1" parallel="methods">
+        <parameter name="emailAddress" value="bobi@gmail.com"/>
+        <parameter name="firstName" value="bob"/>
+        <parameter name="lastName" value="bobo"/>
+        <parameter name="company" value="intentIQ"/>
+        <parameter name="city" value="tel aviv"/>
+        <parameter name="streetFirstFirstLine" value="hertsel"/>
+        <parameter name="zipCode" value="6810104"/>
+        <parameter name="phoneNumber" value="0529653215"/>
+        <parameter name="country" value="IL"/>
+        <classes>
+            <class name="selenium_tests.magento.OrderTracker"/>
+        </classes>
+    </test>
+
+</suite>

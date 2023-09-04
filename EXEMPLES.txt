@@ -1,0 +1,10 @@
+elements
+
+//button[text()='Click for JS Alert']
+//a[contains(text(),'text')]
+
+//tagName[@att='']\\tag\tag
+
+browser
+
+//*[@id="content"]
