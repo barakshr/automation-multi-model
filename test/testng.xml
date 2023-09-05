@@ -12,7 +12,7 @@
         <parameter name="phoneNumber" value="0529653215"/>
         <parameter name="country" value="IL"/>
         <classes>
-            <class name="selenium.magento.OrderTracker"/>
+            <class name="ui.selenium.magento.OrderTracker"/>
         </classes>
     </test>
 
