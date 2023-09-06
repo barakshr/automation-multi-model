@@ -1,6 +1,7 @@
 package api.academy;
 
 import api.BaseTest;
+import com.team.api.properties.Param;
 import com.team.api.properties.Payload;
 import com.team.api.properties.Settings;
 import io.restassured.RestAssured;
@@ -9,6 +10,9 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -16,8 +20,8 @@ import static org.hamcrest.Matchers.equalTo;
 public class PlaceApiTests extends BaseTest {
 
     @Test
-    public void fff(){
-       String text= Payload.readPayloadJson("addPlacePayload.json");
+    public void fff() {
+        String text = Payload.readPayloadJson("addPlacePayload.json");
     }
 
     @Test
@@ -30,6 +34,7 @@ public class PlaceApiTests extends BaseTest {
                 .header("server", "Apache/2.4.52 (Ubuntu)");
 
     }
+
     @Test
     public void verifyGetCommand() {
         Response postResponse = executePostCommand();
@@ -55,7 +60,7 @@ public class PlaceApiTests extends BaseTest {
         Response postResponse = executePostCommand();
         String placeId = extractPlaceIdFromResponse(postResponse);
         String updateApiRecourse = "maps/api/place/update/json";
-        String payload=Payload.readPayloadJson("updatePlacePayload.json");
+        String payload = Payload.readPayloadJson("updatePlacePayload.json");
         String response = given()
                 .log().all()
                 .queryParam("key", "qaclick123")
@@ -74,10 +79,9 @@ public class PlaceApiTests extends BaseTest {
     }
 
 
-
     private Response executePostCommand() {
         String postApiRecourse = "maps/api/place/add/json";
-        String payload=Payload.readPayloadJson("addPlacePayload.json");
+        String payload = Payload.readPayloadJson("addPlacePayload.json");
         return RestAssured.given()
                 .baseUri(Settings.AUT)
                 .log().all()
@@ -94,6 +98,16 @@ public class PlaceApiTests extends BaseTest {
         return js.getString("place_id");
     }
 
+    @Test
+    public void ffdfff() {
+        Param param = new Param("%param_0", "string", 20);
+         List<Param> params= new ArrayList<>();
+         params.add(param);
+
+           //     .addParam("{param_2}", "int", "hello");
+        Payload.readPayloadJson("temp.json", params);
+
+    }
 
 
 }
