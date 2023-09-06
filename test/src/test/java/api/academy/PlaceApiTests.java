@@ -1,6 +1,7 @@
-package api.rahulshettyacademy;
+package api.academy;
 
 import api.BaseTest;
+import com.team.api.properties.Payload;
 import com.team.api.properties.Settings;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -12,12 +13,16 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class ApiTests extends BaseTest {
-
+public class PlaceApiTests extends BaseTest {
 
     @Test
-    public void assertPost() {
-        postCommand()
+    public void fff(){
+       String text= Payload.readPayloadJson("addPlacePayload.json");
+    }
+
+    @Test
+    public void verifyPostCommand() {
+        executePostCommand()
                 .then()
                 .assertThat()
                 .statusCode(200)
@@ -25,14 +30,12 @@ public class ApiTests extends BaseTest {
                 .header("server", "Apache/2.4.52 (Ubuntu)");
 
     }
-
     @Test
-    public void assertGet() {
-        Response postResponse = postCommand();
-        String placeId = extractPlaceId(postResponse);
+    public void verifyGetCommand() {
+        Response postResponse = executePostCommand();
+        String placeId = extractPlaceIdFromResponse(postResponse);
         String getApiRecourse = "maps/api/place/get/json";
-
-        String getPlaceResponse = given()
+        String placeResponse = given()
                 .log().all()
                 .baseUri(Settings.AUT)
                 .queryParam("key", "qaclick123")
@@ -42,29 +45,22 @@ public class ApiTests extends BaseTest {
                 .then()
                 .assertThat().log().all().statusCode(200)
                 .extract().response().asString();
-        JsonPath jsonPath = ReUsableMethods.rawToJson(getPlaceResponse);
+        JsonPath jsonPath = new JsonPath(placeResponse);
         String actualAddress = jsonPath.getString("address");
         Assert.assertEquals(actualAddress, "29, side layout, cohen 09");
     }
 
-
     @Test
-    public void assertPut() {
-        Response postResponse = postCommand();
-        String placeId = extractPlaceId(postResponse);
+    public void verifyPutCommand() {
+        Response postResponse = executePostCommand();
+        String placeId = extractPlaceIdFromResponse(postResponse);
         String updateApiRecourse = "maps/api/place/update/json";
-
-
-        String newAddress = "Summer Walk, Africa";
+        String payload=Payload.readPayloadJson("updatePlacePayload.json");
         String response = given()
                 .log().all()
                 .queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
-                .body("{\r\n" +
-                        "\"place_id\":\"" + placeId + "\",\r\n" +
-                        "\"address\":\"" + newAddress + "\",\r\n" +
-                        "\"key\":\"qaclick123\"\r\n" +
-                        "}")
+                .body(payload)
                 .when()
                 .put(updateApiRecourse)
                 .then()
@@ -77,22 +73,27 @@ public class ApiTests extends BaseTest {
         Assert.assertEquals(updatedActualAddress, "Summer Walk, Africa");
     }
 
-    private Response postCommand() {
+
+
+    private Response executePostCommand() {
         String postApiRecourse = "maps/api/place/add/json";
+        String payload=Payload.readPayloadJson("addPlacePayload.json");
         return RestAssured.given()
                 .baseUri(Settings.AUT)
                 .log().all()
                 .header(Settings.HeaderTypeKey, Settings.HeaderTypeValue)
                 .queryParam("key", "qaclick123")
-                .body(payload.AddPlace())
+                .body(payload)
                 .when()
                 .post(postApiRecourse);
     }
 
-    private String extractPlaceId(Response postResponse) {
+    private String extractPlaceIdFromResponse(Response postResponse) {
         String stringResponse = postResponse.then().extract().response().asString();
         JsonPath js = new JsonPath(stringResponse); //for parsing Json
         return js.getString("place_id");
-
     }
+
+
+
 }

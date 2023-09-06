@@ -1,4 +1,4 @@
-package api.rahulshettyacademy;
+package api.academy;
 
 public class payload {
 
