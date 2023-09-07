@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -50,15 +51,15 @@ public class PlaceApiTests extends BaseTest {
         Assert.assertEquals(actualName, "Rahul Shetty Academy");
     }
 
-    @Test
-    public void testPutCommand() {
+    @Test(dataProvider = "params")
+    public void testPutCommand(String key,String value) {
         //post
         Response postResponse = executePostCommand();
         String placeId = extractPlaceIdFromResponse(postResponse);
 
         //put
         List<Param> paramList = new ParamBuilder()
-                .addParam("%param_1", "Ney York")
+                .addParam(key, value)
                 .getParamLists();
         String payload = Payload.getJsonPayload(JsonFilePath, paramList);
         String updateApiRecourse = "maps/api/place/update/json";
@@ -103,6 +104,7 @@ public class PlaceApiTests extends BaseTest {
     }
 
     Response executeGetCommand(String placeId) {
+
         String getApiRecourse = "maps/api/place/get/json";
         return given()
                 .log().all()
@@ -131,6 +133,14 @@ public class PlaceApiTests extends BaseTest {
         String stringResponse = postResponse.then().extract().response().asString();
         JsonPath js = new JsonPath(stringResponse); //for parsing Json
         return js.getString("place_id");
+    }
+
+    @DataProvider(name="params")
+    public Object[][] paramsProvider(){
+        return  new Object[][] {
+                {"%param_1","New York"}, //test1
+                {"%param_1","Chicago"}}; //test2
+
     }
 
 }
