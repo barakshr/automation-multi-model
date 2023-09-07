@@ -29,6 +29,7 @@ public class PlaceApiTests extends BaseTest {
                 .statusCode(200)
                 .body("scope", equalTo("APP"))
                 .header("server", "Apache/2.4.52 (Ubuntu)");
+
     }
 
     @Test
