@@ -18,8 +18,6 @@ public class PlaceApiTests extends BaseTest {
 
     private final static String JsonFilePath="placePayload.json";
 
-
-
     @Test
     public void verifyPostCommand() {
         executePostCommand()
@@ -95,18 +93,5 @@ public class PlaceApiTests extends BaseTest {
         JsonPath js = new JsonPath(stringResponse); //for parsing Json
         return js.getString("place_id");
     }
-
-    @Test
-    public void ffdfff() {
-        List<Param> paramList = new ParamBuilder()
-                .addParam("%param_0", "hi")
-                .addParam("%param_1",  20)
-                .addParam("%param_2",  true)
-                .getParamLists();
-
-       String x= Payload.getJsonPayload("temp.json", paramList);
-
-    }
-
 
 }
