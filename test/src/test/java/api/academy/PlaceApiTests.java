@@ -1,7 +1,10 @@
 package api.academy;
 
 import api.BaseTest;
-import com.team.api.properties.*;
+import com.team.api.properties.Param;
+import com.team.api.properties.ParamBuilder;
+import com.team.api.properties.Payload;
+import com.team.api.properties.Settings;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -16,7 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class PlaceApiTests extends BaseTest {
 
-    private final static String JsonFilePath="placePayload.json";
+    private final static String JsonFilePath = "placePayload.json";
 
     @Test
     public void verifyPostCommand() {
@@ -55,7 +58,7 @@ public class PlaceApiTests extends BaseTest {
         List<Param> paramList = new ParamBuilder()
                 .addParam("%param_1", "Ney York")
                 .getParamLists();
-        String payload = Payload.getJsonPayload(JsonFilePath,paramList);
+        String payload = Payload.getJsonPayload(JsonFilePath, paramList);
         String updateApiRecourse = "maps/api/place/update/json";
         String response = given()
                 .log().all()
