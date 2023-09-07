@@ -1,12 +1,12 @@
 {
   "location": {
-    "lat": "{param_1}",
+    "lat": 33.427361,
     "lng": 33.427362
   },
   "accuracy": 50,
   "name": "Rahul Shetty Academy",
   "phone_number": "(+91) 983 893 3937",
-  "address": "{param_2}",
+  "address": "%param_1",
   "types": [
     "shoe park",
     "shop"

@@ -1,16 +1,13 @@
 package api.academy;
 
 import api.BaseTest;
-import com.team.api.properties.Param;
-import com.team.api.properties.Payload;
-import com.team.api.properties.Settings;
+import com.team.api.properties.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -19,10 +16,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class PlaceApiTests extends BaseTest {
 
-    @Test
-    public void fff() {
-        String text = Payload.readPayloadJson("addPlacePayload.json");
-    }
+    private final static String JsonFilePath="placePayload.json";
+
+
 
     @Test
     public void verifyPostCommand() {
@@ -51,16 +47,18 @@ public class PlaceApiTests extends BaseTest {
                 .assertThat().log().all().statusCode(200)
                 .extract().response().asString();
         JsonPath jsonPath = new JsonPath(placeResponse);
-        String actualAddress = jsonPath.getString("address");
-        Assert.assertEquals(actualAddress, "29, side layout, cohen 09");
+        String actualName = jsonPath.getString("name");
+        Assert.assertEquals(actualName, "Rahul Shetty Academy");
     }
 
     @Test
     public void verifyPutCommand() {
-        Response postResponse = executePostCommand();
-        String placeId = extractPlaceIdFromResponse(postResponse);
+        executePostCommand();
+        List<Param> paramList = new ParamBuilder()
+                .addParam("%param_1", "Ney York")
+                .getParamLists();
+        String payload = Payload.getJsonPayload(JsonFilePath,paramList);
         String updateApiRecourse = "maps/api/place/update/json";
-        String payload = Payload.readPayloadJson("updatePlacePayload.json");
         String response = given()
                 .log().all()
                 .queryParam("key", "qaclick123")
@@ -75,13 +73,13 @@ public class PlaceApiTests extends BaseTest {
 
         JsonPath jsonPath = new JsonPath(response);
         String updatedActualAddress = jsonPath.getString("address");
-        Assert.assertEquals(updatedActualAddress, "Summer Walk, Africa");
+        Assert.assertEquals(updatedActualAddress, "New York");
     }
 
 
     private Response executePostCommand() {
         String postApiRecourse = "maps/api/place/add/json";
-        String payload = Payload.readPayloadJson("addPlacePayload.json");
+        String payload = Payload.getJsonPayload(JsonFilePath);
         return RestAssured.given()
                 .baseUri(Settings.AUT)
                 .log().all()
@@ -100,12 +98,13 @@ public class PlaceApiTests extends BaseTest {
 
     @Test
     public void ffdfff() {
-        Param param = new Param("%param_0", "string", 20);
-         List<Param> params= new ArrayList<>();
-         params.add(param);
+        List<Param> paramList = new ParamBuilder()
+                .addParam("%param_0", "hi")
+                .addParam("%param_1",  20)
+                .addParam("%param_2",  true)
+                .getParamLists();
 
-           //     .addParam("{param_2}", "int", "hello");
-        Payload.readPayloadJson("temp.json", params);
+       String x= Payload.getJsonPayload("temp.json", paramList);
 
     }
 

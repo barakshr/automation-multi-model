@@ -9,30 +9,27 @@ import java.util.stream.Collectors;
 
 public class Payload {
 
-    public static String readPayloadJson(String path, List<Param> params) {
-        String text = readPayloadJson(path);
-        for (Param param : params) {
+    public static String getJsonPayload(String path, List<Param> paramList) {
+        String updatedText = getJsonPayload(path);
+        for (Param param : paramList) {
             String paramName = param.getParamName();
             Object paramValue = param.getParamValue();
-            String type = param.getType();
-            String newString = "";
-            if (type.equals("string")) {
+            String newString ;
+            if (paramValue.getClass().equals(String.class)) {
                 newString = paramName;
             } else {
                 newString = String.format("\"%s\"", paramName);
             }
-            text = text.replaceAll(newString, paramValue.toString());
+            updatedText = updatedText.replaceAll(newString, paramValue.toString());
         }
-
-        return "";
+        return updatedText;
     }
 
-    public static String readPayloadJson(String path) {
+    public static String getJsonPayload(String path) {
         InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("api-payloads/" + path);
-        String text = new BufferedReader(
+        return new BufferedReader(
                 new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                 .lines()
                 .collect(Collectors.joining("\n"));
-        return text;
     }
 }

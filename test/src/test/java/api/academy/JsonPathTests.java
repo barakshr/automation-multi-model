@@ -9,7 +9,7 @@ public class JsonPathTests {
 
     @Test
     public void jsonPathTest() {
-        String payloadJson = Payload.readPayloadJson("coursePrice.json");
+        String payloadJson = Payload.getJsonPayload("coursePrice.json");
         JsonPath js = new JsonPath(payloadJson);
         int actualCount = js.getInt("courses.size()");
         String titleFirstCourse = js.get("courses[2].title");
