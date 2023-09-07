@@ -1,4 +1,4 @@
-package com.team.api.properties;
+package com.team.api.payload;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

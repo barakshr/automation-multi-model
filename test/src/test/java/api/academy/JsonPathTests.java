@@ -1,6 +1,6 @@
 package api.academy;
 
-import com.team.api.properties.Payload;
+import com.team.api.payload.Payload;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;

@@ -1,9 +1,9 @@
 package api.academy;
 
 import api.BaseTest;
-import com.team.api.properties.Param;
-import com.team.api.properties.ParamBuilder;
-import com.team.api.properties.Payload;
+import com.team.api.payload.Param;
+import com.team.api.payload.ParamBuilder;
+import com.team.api.payload.Payload;
 import com.team.api.properties.Settings;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
