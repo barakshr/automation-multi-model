@@ -22,59 +22,94 @@ public class PlaceApiTests extends BaseTest {
     private final static String JsonFilePath = "placePayload.json";
 
     @Test
-    public void verifyPostCommand() {
+    public void testPostCommand() {
         executePostCommand()
                 .then()
                 .assertThat()
                 .statusCode(200)
                 .body("scope", equalTo("APP"))
                 .header("server", "Apache/2.4.52 (Ubuntu)");
-
     }
 
     @Test
-    public void verifyGetCommand() {
+    public void testGetCommand() {
+        //post
         Response postResponse = executePostCommand();
         String placeId = extractPlaceIdFromResponse(postResponse);
-        String getApiRecourse = "maps/api/place/get/json";
-        String placeResponse = given()
-                .log().all()
-                .baseUri(Settings.AUT)
-                .queryParam("key", "qaclick123")
-                .queryParam("place_id", placeId)
-                .when()
-                .get(getApiRecourse)
+
+        //get
+        String placeResponse = executeGetCommand(placeId)
                 .then()
                 .assertThat().log().all().statusCode(200)
                 .extract().response().asString();
         JsonPath jsonPath = new JsonPath(placeResponse);
         String actualName = jsonPath.getString("name");
+
+        //verify
         Assert.assertEquals(actualName, "Rahul Shetty Academy");
     }
 
     @Test
-    public void verifyPutCommand() {
-        executePostCommand();
+    public void testPutCommand() {
+        //post
+        Response postResponse = executePostCommand();
+        String placeId = extractPlaceIdFromResponse(postResponse);
+
+        //put
         List<Param> paramList = new ParamBuilder()
                 .addParam("%param_1", "Ney York")
                 .getParamLists();
         String payload = Payload.getJsonPayload(JsonFilePath, paramList);
         String updateApiRecourse = "maps/api/place/update/json";
-        String response = given()
+        given()
                 .log().all()
                 .queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
                 .body(payload)
                 .when()
-                .put(updateApiRecourse)
-                .then()
-                .assertThat().log().all().statusCode(200)
-                .body("msg", equalTo("Address successfully updated"))
-                .extract().body().asString();
+                .put(updateApiRecourse);
 
-        JsonPath jsonPath = new JsonPath(response);
+        //get
+        String getResponse = executeGetCommand(placeId)
+                .then().extract().body().asString();
+        JsonPath jsonPath = new JsonPath(getResponse);
         String updatedActualAddress = jsonPath.getString("address");
+
+        //verify
         Assert.assertEquals(updatedActualAddress, "New York");
+    }
+
+    @Test
+    public void testDeleteCommand() {
+        //post
+        Response postResponse = executePostCommand();
+        String placeId = extractPlaceIdFromResponse(postResponse);
+
+        //delete
+        String getApiRecourse = "maps/api/place/get/json";
+        given()
+                .log().all()
+                .baseUri(Settings.AUT)
+                .queryParam("key", "qaclick123")
+                .queryParam("place_id", placeId)
+                .when()
+                .delete(getApiRecourse)
+                .then()
+                .assertThat().log().all().statusCode(200);
+
+        //get
+        executeGetCommand(placeId).then().assertThat().statusCode(404);
+    }
+
+    Response executeGetCommand(String placeId) {
+        String getApiRecourse = "maps/api/place/get/json";
+        return given()
+                .log().all()
+                .baseUri(Settings.AUT)
+                .queryParam("key", "qaclick123")
+                .queryParam("place_id", placeId)
+                .when()
+                .get(getApiRecourse);
     }
 
 

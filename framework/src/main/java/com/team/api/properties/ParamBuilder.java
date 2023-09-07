@@ -8,7 +8,7 @@ public class ParamBuilder {
     private final List<Param> paramList;
 
     public ParamBuilder() {
-        this.paramList = new ArrayList();
+        this.paramList = new ArrayList<>();
     }
 
 

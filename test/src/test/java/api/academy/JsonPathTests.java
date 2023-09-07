@@ -17,7 +17,4 @@ public class JsonPathTests {
         Assert.assertEquals(actualCount,4);
         Assert.assertEquals(titleFirstCourse,"RPA");
     }
-
-
-
 }
