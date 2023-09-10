@@ -1,0 +1,24 @@
+Intellij
+
+Extend selection : ⌥ ↑
+Start new line: shift- enter 
+Navigate to last edit location : ⌘ - shift - backspace
+Move to code block end / start : ⌘ ⌥ [ / ⌘ ⌥ ]
+Next / Previous highlighted error : shift - F2
+
+Basic code completion: ⌃ Space
+Code completion: ctrl -shift-Space
+
+Mark code:  opt - ↑ 
+Recent files popup: ⌘ E
+Open corresponding tool window: ⌘0...⌘9
+Smart step into / Step out ⇧F7 / ⇧F8
+Find  previous : ⌘⇧G
+Surround with : ⌘ ⌥ T
+Expand / collapse code block : ⌘ + / ⌘ -
+Expand all : ⌘- shift- +
+Go to implementation(s) : ⌘ ⌥ B
+
+Toggle bookmark  : F3
+Show bookmarks : ⌘ F3
+
