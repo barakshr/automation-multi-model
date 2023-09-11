@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class PlaceApiTests extends BaseTest {
+public class PlaceTests extends BaseTest {
 
     private final static String JsonFilePath = "placePayload.json";
 

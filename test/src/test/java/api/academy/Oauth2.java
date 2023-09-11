@@ -13,8 +13,8 @@ import static io.restassured.RestAssured.given;
 public class Oauth2 {
 
     public static void main(String[] args) throws InterruptedException {
-        // TODO Auto-generated method stub
 
+//get auth code
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //driver.get("https://rahulshettyacademy.com/AutomationPractice/");
@@ -27,11 +27,13 @@ public class Oauth2 {
         Thread.sleep(5000);
         String url = driver.getCurrentUrl();
         System.out.println(url);
+
+        //**split is a  good idea instead of regex **//
         String partialcode = url.split("code=")[1];
         String code = partialcode.split("&scope")[0];
         System.out.println(code);
 
-
+//get access token
         String response =
                 given().urlEncodingEnabled(false)
                         .queryParams("code", code)
@@ -48,6 +50,8 @@ public class Oauth2 {
         String accessToken = jsonPath.getString("access_token");
         System.out.println(accessToken);
 
+
+        //request
         String r2 = given().contentType("application/json").
                 queryParams("access_token", accessToken).expect().defaultParser(Parser.JSON)
                 .when()

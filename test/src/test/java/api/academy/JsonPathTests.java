@@ -1,11 +1,12 @@
 package api.academy;
 
+import api.BaseTest;
 import com.team.api.payload.Payload;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class JsonPathTests {
+public class JsonPathTests  extends BaseTest {
 
     @Test
     public void jsonPathTest() {
