@@ -33,7 +33,6 @@ public class ZipCode extends BaseTest {
 
     @Test(enabled = false)
     public void serialize() {
-
         PlacesApi placesApi = new PlacesApi("1","2","3","4","5");
         ZipApi zipApi= new ZipApi("a","b","c", Collections.singletonList(placesApi));
          RestAssured.given()

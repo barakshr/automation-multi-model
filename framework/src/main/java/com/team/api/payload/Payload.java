@@ -14,7 +14,7 @@ public class Payload {
         for (Param param : paramList) {
             String paramName = param.getParamName();
             Object paramValue = param.getParamValue();
-            String newString ;
+            String newString;
             if (paramValue.getClass().equals(String.class)) {
                 newString = paramName;
             } else {

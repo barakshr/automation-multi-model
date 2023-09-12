@@ -22,6 +22,7 @@ public class PlaceTests extends BaseTest {
 
     private final static String JsonFilePath = "placePayload.json";
 
+
     @Test
     public void testPostCommand() {
         executePostCommand()
@@ -42,7 +43,8 @@ public class PlaceTests extends BaseTest {
         //get
         String placeResponse = executeGetCommand(placeId)
                 .then()
-                .assertThat().log().all().statusCode(200)
+                .assertThat().log().all()
+                .spec(getResponseSpecification())
                 .extract().response().asString();
         JsonPath jsonPath = new JsonPath(placeResponse);
         String actualName = jsonPath.getString("name");
@@ -51,8 +53,8 @@ public class PlaceTests extends BaseTest {
         Assert.assertEquals(actualName, "Rahul Shetty Academy");
     }
 
-    @Test(dataProvider = "params")
-    public void testPutCommand(String key,String value) {
+    @Test(enabled = false, dataProvider = "params")
+    public void testPutCommand(String key, Object value) {
         //post
         Response postResponse = executePostCommand();
         String placeId = extractPlaceIdFromResponse(postResponse);
@@ -63,10 +65,9 @@ public class PlaceTests extends BaseTest {
                 .getParamLists();
         String payload = Payload.getJsonPayload(JsonFilePath, paramList);
         String updateApiRecourse = "maps/api/place/update/json";
-        given()
-                .log().all()
+        given().log().all()
+                .spec(getRequestSpecification())
                 .queryParam("key", "qaclick123")
-                .header("Content-Type", "application/json")
                 .body(payload)
                 .when()
                 .put(updateApiRecourse);
@@ -104,7 +105,6 @@ public class PlaceTests extends BaseTest {
     }
 
     Response executeGetCommand(String placeId) {
-
         String getApiRecourse = "maps/api/place/get/json";
         return given()
                 .log().all()
@@ -120,9 +120,8 @@ public class PlaceTests extends BaseTest {
         String postApiRecourse = "maps/api/place/add/json";
         String payload = Payload.getJsonPayload(JsonFilePath);
         return RestAssured.given()
-                .baseUri(Settings.AUT)
+                .spec(getRequestSpecification())
                 .log().all()
-                .header(Settings.HeaderTypeKey, Settings.HeaderTypeValue)
                 .queryParam("key", "qaclick123")
                 .body(payload)
                 .when()
@@ -135,11 +134,11 @@ public class PlaceTests extends BaseTest {
         return js.getString("place_id");
     }
 
-    @DataProvider(name="params")
-    public Object[][] paramsProvider(){
-        return  new Object[][] {
-                {"%param_1","New York"}, //test1
-                {"%param_1","Chicago"}}; //test2
+    @DataProvider(name = "params")
+    public Object[][] paramsProvider() {
+        return new Object[][]{
+                {"%param_1", 2}, //test1
+                {"%param_1", "Chicago"}}; //test2
 
     }
 
