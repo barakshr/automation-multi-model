@@ -2,18 +2,20 @@ package api.zippopotam;
 
 
 import api.BaseTest;
-import io.restassured.RestAssured;
+import api.zippopotam.pojo.PlacesApi;
+import api.zippopotam.pojo.ZipApi;
 import io.restassured.path.json.JsonPath;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
+import static io.restassured.RestAssured.given;
 
 
 public class ZipCode extends BaseTest {
 
     @Test
     public void pathParam() {
-        String body = RestAssured.given()
+        String body = given()
                 .log().all()
                 .pathParams("key", "90210").get("http://api.zippopotam.us/us/{key}")
                 .then()
@@ -25,7 +27,7 @@ public class ZipCode extends BaseTest {
 
     @Test
     public void deserialize() {
-        ZipApi zipApi = RestAssured.given()
+        ZipApi zipApi = given()
                 .log().all()
                 .pathParams("key", "90210").get("http://api.zippopotam.us/us/{key}")
                 .as(ZipApi.class);
@@ -35,7 +37,7 @@ public class ZipCode extends BaseTest {
     public void serialize() {
         PlacesApi placesApi = new PlacesApi("1","2","3","4","5");
         ZipApi zipApi= new ZipApi("a","b","c", Collections.singletonList(placesApi));
-         RestAssured.given()
+         given()
                 .log().all()
                 .pathParams("key", "90210")
                  .body(zipApi)

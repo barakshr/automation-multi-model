@@ -5,7 +5,6 @@ import com.team.api.payload.Param;
 import com.team.api.payload.ParamBuilder;
 import com.team.api.payload.Payload;
 import com.team.api.properties.Settings;
-import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -119,7 +118,7 @@ public class PlaceTests extends BaseTest {
     private Response executePostCommand() {
         String postApiRecourse = "maps/api/place/add/json";
         String payload = Payload.getJsonPayload(JsonFilePath);
-        return RestAssured.given()
+        return given()
                 .spec(getRequestSpecification())
                 .log().all()
                 .queryParam("key", "qaclick123")

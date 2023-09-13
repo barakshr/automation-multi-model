@@ -1,5 +1,6 @@
-package api.zippopotam;
+package api.zippopotam.pojo;
 
+import api.zippopotam.pojo.PlacesApi;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package api.academy;
+package api.academy.exemples_form_udme;
 
 import io.restassured.parsing.Parser;
 import io.restassured.path.json.JsonPath;

@@ -1,4 +1,4 @@
-package api.zippopotam;
+package api.zippopotam.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

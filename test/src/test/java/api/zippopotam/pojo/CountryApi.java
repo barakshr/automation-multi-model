@@ -1,8 +1,8 @@
-package api.zippopotam;
+package api.zippopotam.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Country {
+public class CountryApi {
 
     @JsonProperty("country")
     private String country;
@@ -10,7 +10,7 @@ public class Country {
     private String postCode;
 
 
-    public Country( @JsonProperty("country") String country,@JsonProperty("post code") String postCode) {
+    public CountryApi(@JsonProperty("country") String country, @JsonProperty("post code") String postCode) {
         this.country = country;
         this.postCode = postCode;
     }
