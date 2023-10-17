@@ -65,7 +65,7 @@ public class oAuthTest {
 
         System.out.println(gc.getLinkedIn());
         System.out.println(gc.getInstructor());
-//        System.out.println(gc.getCourses().getApi().get(1).getCourseTitle());
+//       System.out.println(gc.getCourses().getApi().get(1).getCourseTitle());
 
 
         List<Api> apiCourses = gc.getCourses().getApi();
