@@ -11,7 +11,11 @@ public class Settings {
     public static String DriverType;
     public static String ExcelSheetPath;
     public static String AUT;
+
     public static BrowserType BrowserType;
+
+    public static boolean HeadlessBrowser;
+
     public static String DataFilePath;
 
 }

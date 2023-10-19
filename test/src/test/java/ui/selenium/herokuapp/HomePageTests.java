@@ -9,8 +9,7 @@ public class HomePageTests extends BaseTest {
     @Test
     public void goToDropDown(){
         HomePage homePage= new HomePage();
-        homePage
-                .selectLinkToPage("Dropdown");
+        homePage.selectLinkToPage("Dropdown");
             //    .checkPageUrlAppear("https://the-internet.herokuapp.com/dropdown");
     }
 }

@@ -36,5 +36,4 @@ public final class DriverPool {
     public void closeDriver(Long threadId) {
         driversMap.get(threadId).quit();
     }
-
 }
