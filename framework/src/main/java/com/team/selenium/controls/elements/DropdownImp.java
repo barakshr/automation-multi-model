@@ -15,7 +15,6 @@ public class DropdownImp extends ControlImpl implements Dropdown {
         this.dropdown = new Select(element);
     }
 
-
     public void selectFormDropdown(String selectionText) {
         dropdown.selectByValue(selectionText);
     }
@@ -24,5 +23,4 @@ public class DropdownImp extends ControlImpl implements Dropdown {
     public List<String> getDropdownOptions() {
         return dropdown.getAllSelectedOptions().stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
     }
-
 }
