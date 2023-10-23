@@ -7,7 +7,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+
 
 public class BaseTest {
 
@@ -15,8 +15,6 @@ public class BaseTest {
     private  Page page;
 
     private Playwright playwright;
-
-
 
     @BeforeTest
     public void setUp() throws IOException {

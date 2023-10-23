@@ -10,19 +10,19 @@ import org.testng.annotations.Listeners;
 
 @Listeners(Listener.class)
 public abstract class BaseTest {
-    private DriverHandler driverHandler;
     private Logger logger;
 
     @BeforeMethod
     public void setUp() throws Exception {
         logger = LogManager.getLogger(this.getClass());
-        this.driverHandler = new DriverHandler();
-        driverHandler.startDriver();
+        new DriverHandler().startDriver();
+
     }
 
     @AfterMethod
     public void tearDown() {
-        driverHandler.closeDriver();
+        new DriverHandler().closeDriver();
+
     }
 
     public Logger getLogger() {
