@@ -18,7 +18,7 @@ public class ParamBuilder {
         return this;
     }
 
-    public List<Param> getParamLists() {
+    public List<Param> build() {
         return paramList;
     }
 

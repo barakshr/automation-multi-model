@@ -34,7 +34,6 @@ public class  WebDriverFactory {
                 options.addPreference("general.useragent.override", userAgent);
                 WebDriverManager.firefoxdriver().setup();
                 webDriver = new FirefoxDriver(options);
-
                 break;
             case Chrome:
                 ChromeOptions chromeOptions = new ChromeOptions();

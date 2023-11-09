@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Testing">
-    <test name="HorizontalSliderTests_1" parallel="methods">
+    <test name="HorizontalSliderTests_1" parallel="methods" >
         <parameter name="emailAddress" value="bobi@gmail.com"/>
         <parameter name="firstName" value="bob"/>
         <parameter name="lastName" value="bobo"/>

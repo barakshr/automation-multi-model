@@ -61,7 +61,7 @@ public class PlaceTests extends BaseTest {
         //put
         List<Param> paramList = new ParamBuilder()
                 .addParam(key, value)
-                .getParamLists();
+                .build();
         String payload = Payload.getJsonPayload(JsonFilePath, paramList);
         String updateApiRecourse = "maps/api/place/update/json";
         given().log().all()
@@ -103,7 +103,7 @@ public class PlaceTests extends BaseTest {
         executeGetCommand(placeId).then().assertThat().statusCode(404);
     }
 
-    Response executeGetCommand(String placeId) {
+    private Response executeGetCommand(String placeId) {
         String getApiRecourse = "maps/api/place/get/json";
         return given()
                 .log().all()
@@ -124,6 +124,7 @@ public class PlaceTests extends BaseTest {
                 .queryParam("key", "qaclick123")
                 .body(payload)
                 .when()
+
                 .post(postApiRecourse);
     }
 

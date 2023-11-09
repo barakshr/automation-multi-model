@@ -11,7 +11,7 @@ public class DynamicElementsWaitPageTests extends BaseTest {
 
 
     @Test
-    public void dWait() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void dWait() throws  InstantiationException, IllegalAccessException {
         HomePage homePage = new HomePage();
         homePage
                 .selectLinkToPage("Dynamic Loading")

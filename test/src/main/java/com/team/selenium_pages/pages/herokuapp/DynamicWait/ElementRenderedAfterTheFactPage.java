@@ -23,5 +23,4 @@ public class ElementRenderedAfterTheFactPage extends BasePage {
         finish.getText();
     }
 
-
 }

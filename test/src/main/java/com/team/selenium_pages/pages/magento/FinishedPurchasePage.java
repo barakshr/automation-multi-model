@@ -11,10 +11,8 @@ import java.util.regex.Pattern;
 
 public class FinishedPurchasePage extends BasePage {
 
-
     @FindBy(how = How.CLASS_NAME, using = "checkout-success")
     WebElement checkoutSuccess;
-
 
     public String getOrderId() throws Exception {
         getElementWait().waitForVisibilityOf(checkoutSuccess, Duration.ofSeconds(6));

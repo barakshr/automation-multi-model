@@ -36,7 +36,7 @@ public class Iframe  {
         webDriver.get("https://the-internet.herokuapp.com/nested_frames");
 
         //*top_middle frame
-        WebElement topElementFrame = webDriver.findElement(By.name("frame-top"));
+        WebElement topElementFrame = webDriver.findElement( By.name("frame-top"));
         webDriver.switchTo().frame(topElementFrame);
 
         //top frame

@@ -14,7 +14,6 @@ public class DropdownPage extends BasePage {
     @FindBy(how = How.ID, using = "dropdown")
     private Dropdown dropdown;
 
-
     public DropdownPage selectFormDropdown(String option) {
         dropdown.selectFormDropdown(option);
         return this;

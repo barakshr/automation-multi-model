@@ -17,6 +17,4 @@ public class BrokenImages extends BaseExperiment {
         String attVal = webElement.getAttribute("src");
         RestAssured.get(attVal).then().assertThat().statusCode(200);
     }
-
-
 }
