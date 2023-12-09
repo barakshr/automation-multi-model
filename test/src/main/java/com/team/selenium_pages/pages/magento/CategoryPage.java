@@ -17,6 +17,7 @@ public class CategoryPage extends BasePage {
     WebElement cartIconButton;
     @FindBy(how = How.ID, using = "top-cart-btn-checkout")
     WebElement checkOutButton;
+
     private Integer numberOfItemsInCart = 0;
 
     public CategoryPage addItemToCart(int itemNumber) throws Exception {

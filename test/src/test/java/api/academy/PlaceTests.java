@@ -5,6 +5,7 @@ import com.team.api.payload.Param;
 import com.team.api.payload.ParamBuilder;
 import com.team.api.payload.Payload;
 import com.team.api.properties.Settings;
+import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -54,6 +55,7 @@ public class PlaceTests extends BaseTest {
 
     @Test(enabled = false, dataProvider = "params")
     public void testPutCommand(String key, Object value) {
+
         //post
         Response postResponse = executePostCommand();
         String placeId = extractPlaceIdFromResponse(postResponse);
@@ -124,7 +126,6 @@ public class PlaceTests extends BaseTest {
                 .queryParam("key", "qaclick123")
                 .body(payload)
                 .when()
-
                 .post(postApiRecourse);
     }
 
