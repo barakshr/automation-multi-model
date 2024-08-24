@@ -12,10 +12,18 @@ public class DynamicLoadingPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Element rendered after')]")
     WebElement elementRenderedAfterTheFact;
 
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Element on page')]")
+    WebElement elementOnPageIsHidden;
+
 
     public ElementRenderedAfterTheFactPage goToElementRenderedAfterTheFact() {
         elementRenderedAfterTheFact.click();
         return new ElementRenderedAfterTheFactPage();
+    }
+
+    public ElementPageIsHidden goToElementOnPageIsHidden() {
+        elementOnPageIsHidden.click();
+        return new ElementPageIsHidden();
     }
 
 

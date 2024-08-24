@@ -11,7 +11,17 @@ public class DynamicElementsWaitPageTests extends BaseTest {
 
 
     @Test
-    public void dWait() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void dWaitExample1() throws InstantiationException, IllegalAccessException {
+        HomePage homePage = new HomePage();
+        homePage
+                .selectLinkToPage("Dynamic Loading")
+                .goToPage(DynamicLoadingPage.class)
+                .goToElementOnPageIsHidden()
+                .press();
+    }
+
+    @Test
+    public void dWaitExample2() throws InstantiationException, IllegalAccessException {
         HomePage homePage = new HomePage();
         homePage
                 .selectLinkToPage("Dynamic Loading")
@@ -19,5 +29,7 @@ public class DynamicElementsWaitPageTests extends BaseTest {
                 .goToElementRenderedAfterTheFact()
                 .press();
     }
+
+
 
 }
