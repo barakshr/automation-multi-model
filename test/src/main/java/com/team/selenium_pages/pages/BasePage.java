@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage {
     private final Logger logger;
@@ -20,7 +21,7 @@ public abstract class BasePage {
     public BasePage() {
         logger = LogManager.getLogger(this.getClass());
         this.webDriver = DriverPool.getInstance().getDriver(Thread.currentThread().getId());
-        ControlFactory.initElements(this.webDriver, this);
+        PageFactory.initElements(webDriver, this);
         this.browserAction = new BrowserAction();
         this.elementWait = new ElementWait();
     }

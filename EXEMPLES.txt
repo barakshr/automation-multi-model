@@ -1,4 +1,4 @@
-elements
+elements locators
 
 //button[text()='Click for JS Alert']
 //a[contains(text(),'text')]
@@ -8,3 +8,43 @@ elements
 browser
 
 //*[@id="content"]
+
+
+code:
+//go to address bar
+actions.keyDown(Keys.COMMAND).sendKeys("l").perform();
+
+//hover
+getActions().moveToElement(hoveredImage).perform();
+
+//drag and drop
+action.clickAndHold(columnA).moveToElement(columnB).release(columnB).perform();
+
+//alert
+getWebDriver().switchTo().alert().accept();
+
+//print $
+element.sendkeys(Keys.chord(Keys.SHIFT, "4")
+
+//dropdown
+new Select(dropdownElement).selectByValue("oprion name");
+
+//slider right
+sliderElement.sendKeys(Keys.ARROW_RIGHT);
+
+
+//iframe
+webDriver.switchTo().frame(frameElement);
+webDriver.switchTo().parentFrame();
+
+//jquery menu
+Actions actions = new Actions(getWebDriver());
+WebElement enabled = getWebDriver().findElement(By.xpath("//li[@id='ui-id-3']/a"));
+actions.moveToElement(enabled).perform();
+
+//scroll
+((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", webElement);
+
+//tabs
+Set<String> allWindowTabss= getWebDriver().getWindowHandles();
+Iterator<String> iterate = allWindowTabss.iterator();

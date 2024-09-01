@@ -23,14 +23,4 @@ public class FigureCaptionElement {
         webElement.findElement(figureCaptionLink).click();
         return new ViewProfilePage();
     }
-
-
-
-
-
-
-
-
-
-
 }
